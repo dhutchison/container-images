@@ -1,0 +1,29 @@
+version: '3.7'
+
+networks:
+  traefik-backend:
+    external: 
+      name: traefik-backend
+
+volumes:
+  homebridge_config:
+
+services:
+
+  homebridge:
+    image: oznu/homebridge:no-avahi
+    restart: unless-stopped
+    networks: 
+     - traefik-backend
+    volumes:
+      - homebridge_config:/homebridge
+      - /data-storage/app-data/homebridge/config.json:/homebridge/config.json
+      - /data-storage/app-data/homebridge/package.json:/homebridge/package.json
+    environment:
+      - PGID=1099
+      - PUID=1099
+      - HOMEBRIDGE_CONFIG_UI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT=8080
+    ports:
+     - 51833:51833/tcp
+     - 52100-52150:52100-52150/tcp
