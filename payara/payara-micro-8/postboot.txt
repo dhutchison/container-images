@@ -1,0 +1,3 @@
+set configs.config.server-config.amx-configuration.enabled=true
+set configs.config.server-config.monitoring-service.module-monitoring-levels.jdbc-connection-pool=HIGH
+set configs.config.server-config.monitoring-service.module-monitoring-levels.http-service=HIGH

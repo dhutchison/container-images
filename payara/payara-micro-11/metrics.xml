@@ -1,0 +1,52 @@
+<config>
+    <vendor>
+        <metadata>
+            <name>jdbc.connection.pool.%sPool.numconnfree</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=jdbc-connection-pool-mon,name=resources/%sPool/numconnfree#current</mbean>
+            <type>counter</type>
+            <unit>none</unit>
+            <displayName>numconnfreePool</displayName>
+            <description>The total number of free connections in the pool as of the last sampling.</description>
+        </metadata>
+        <metadata>
+            <name>http.connection.queue.%s.numconnopen</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=connection-queue-mon,name=network/http-%s/connection-queue/countopenconnections#count</mbean>
+            <type>gauge</type>
+            <unit>none</unit>
+            <displayName>numconnopenPool</displayName>
+            <description>The number of open/active connections</description>
+        </metadata>
+        <metadata>
+            <name>http.connection.pool.%s.numconn</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=connection-queue-mon,name=network/http-%s/connection-queue/counttotalqueued#count</mbean>
+            <type>gauge</type>
+            <unit>none</unit>
+            <displayName>numconncountPool</displayName>
+            <description>Number of http connections handled</description>
+        </metadata>
+        <metadata>
+            <name>http.connection.queue.http.numconnopen</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=connection-queue-mon,name=network//connection-queue/countopenconnections#count</mbean>
+            <type>gauge</type>
+            <unit>none</unit>
+            <displayName>numconnopenPool</displayName>
+            <description>The number of open/active http connections</description>
+        </metadata>
+        <metadata>
+            <name>http.connection.pool.http.numconn</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=connection-queue-mon,name=network//connection-queue/counttotalqueued#count</mbean>
+            <type>gauge</type>
+            <unit>none</unit>
+            <displayName>numconncountPool</displayName>
+            <description>Total number of connections that have been queued</description>
+        </metadata>
+        <metadata>
+            <name>http.connection.pool.http.counttotalconnections</name>
+            <mbean>amx:pp=/mon/server-mon[server],type=connection-queue-mon,name=network//connection-queue/counttotalconnections#count</mbean>
+            <type>gauge</type>
+            <unit>none</unit>
+            <displayName>counttotalconnections</displayName>
+            <description>Total Number of connections handled</description>
+        </metadata>
+    </vendor>
+</config>
