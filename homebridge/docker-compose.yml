@@ -13,8 +13,13 @@ services:
   homebridge:
     image: oznu/homebridge:no-avahi
     restart: unless-stopped
-    networks: 
-     - traefik-backend
+
+    networks:
+      traefik-backend:
+        # Need a fixed IP here so we can use WOL from the Samsung Tizen plugin
+        # without using host networking
+        ipv4_address: 172.32.0.200
+    
     volumes:
       - homebridge_config:/homebridge
       - /data-storage/app-data/homebridge/config.json:/homebridge/config.json
@@ -22,8 +27,23 @@ services:
     environment:
       - PGID=1099
       - PUID=1099
+      # Run the homebridge configuration UI
       - HOMEBRIDGE_CONFIG_UI=1
       - HOMEBRIDGE_CONFIG_UI_PORT=8080
     ports:
      - 51833:51833/tcp
      - 52100-52150:52100-52150/tcp
+    labels:
+  
+      # traefik v2 labels
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-backend"
+      - "traefik.http.routers.homebridge.rule=Host(`homebridge.example.com`)"
+      - "traefik.http.routers.homebridge.entrypoints=websecure"
+      - "traefik.http.routers.homebridge.service=homebridge"
+      - "traefik.http.routers.homebridge.tls=true"
+      - "traefik.http.routers.homebridge.tls.certresolver=mycertresolver"
+      - "traefik.http.routers.homebridge.tls.domains[0].main=homebridge.example.com"
+
+      # Container port to expose
+      - "traefik.http.services.homebridge.loadbalancer.server.port=8080"
