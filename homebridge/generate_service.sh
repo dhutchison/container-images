@@ -11,7 +11,7 @@ function create_service_file {
   local setup_id=$5
 
      # Write the service configurtion file to the current directory
-cat <<EOF>"${name}.service"
+cat <<EOF > "${name}.service"
 <service-group>
   <name>$name</name>
   <service>
